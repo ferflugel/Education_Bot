@@ -14,9 +14,14 @@ async def on_message(message):
   id = client.get_guild(810149199488352256)
   
   if message.author == client.user:
-      return
+    return
 
   if message.content.startswith('~hi'):
-      await message.channel.send("hey")
+    await message.channel.send("hey")
+  
+  # MAKING AN ANNOUNCEMENT
+  if message.content.startswith('~announcement'):
+    await message.channel.purge(limit=1)
+    await message.channel.send(f"@everyone\n```diff\n+Announcement\n{message.content[13:]}```")
 
 client.run('Token Goes Here')
