@@ -53,5 +53,21 @@ async def on_message(message):
         await member.move_to(channel)
       except:
         pass
+  
+  # MUTES EVERY MEMBER
+  if message.content.startswith('~mute'):
+    for member in guild.members:
+      try:
+        await member.edit(mute=True)
+      except:
+        pass
+
+  # UNMUTES EVERY MEMBER
+  if message.content.startswith('~unmute'):
+    for member in guild.members:
+      try:
+        await member.edit(mute=False)
+      except:
+        pass
 
 client.run('Token Goes Here')
