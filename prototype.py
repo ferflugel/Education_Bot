@@ -19,4 +19,4 @@ async def on_message(message):
   if message.content.startswith('~hi'):
       await message.channel.send("hey")
 
-client.run('ODEwMTk1Mzc4ODgzMjY0NTMy.YCgHPw.DFHPSi5S1CnR595dDyhZDyoLlxc')
+client.run('Token Goes Here')
