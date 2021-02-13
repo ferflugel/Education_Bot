@@ -87,7 +87,14 @@ async def on_message(message):
 
   # ANSWERS A QUESTION
   if message.content.startswith('~answer'):
-    index = (int(message.content[8]) - 1) * 2
-    await message.channel.send(f"{questions[index + 1].mention} here is the answer to **{questions[index] message.content[8]}**: ")
+    index = (int(message.content.split()[1]) - 1) * 2
+    await message.channel.send(f"{questions[index + 1].mention} here is the answer to *'{questions[index]}'* : {message.content[9:]}")
+    questions.pop(index)
+    questions.pop(index)
+
+# CREATE A POLL
+  if message.content.startswith('~poll'):
+    await message.add_reaction('👍')
+    await message.add_reaction('👎')
 
 client.run('Token Goes Here')
