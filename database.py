@@ -1,7 +1,6 @@
 import csv
 import pandas
 
-# input should be ~insert event_name MMDDYY
 def insert_event(event, deadline):
   with open(r'data.csv', 'a', newline='') as csvfile:
     fieldnames = ['Event','Deadline']
