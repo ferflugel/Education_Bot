@@ -2,6 +2,8 @@ import discord, matplotlib.pyplot as plt, numpy as np
 import random
 from math import *
 from discord.ext import commands
+import database
+import search
 
 client = discord.Client()
 
@@ -103,6 +105,20 @@ async def on_message(message):
     await message.add_reaction('👍')
     await message.add_reaction('👎')
 
+  # SEARCH ENGINE
+  if message.content.startswith('~search'):
+    await message.channel.send(search.communicate(message.content[8:]))
+
+  # ADD ASSIGNMENT TO CALENDAR
+  if message.content.startswith('~assignment'):
+    event, deadline = message.content.split()[1], message.content.split()[2]
+    database.insert_event(event, deadline)
+
+  # SEE CALENDAR
+  if message.content.startswith('~see_assignments'):
+    await message.channel.send(database.print_calendar())
+      
+
   ########################## INTEGRATED CALCULATOR ##############################
 
   # ADDITION
@@ -125,7 +141,7 @@ async def on_message(message):
     a, b = int(message.content.split()[1]), int(message.content.split()[2])
     await message.channel.send(str(a / b))
 
-  # MARK
+  # MARK~
   if message.content.startswith('~mark'):
     a, b = int(message.content.split()[1]), int(message.content.split()[2])
     await message.channel.send(f"{str(round(100 * (a / b), 2))}%")
