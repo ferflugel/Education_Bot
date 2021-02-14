@@ -1,4 +1,4 @@
-import discord, matplotlib.pyplot as plt, numpy as np
+import discord, numpy as np
 import random
 from math import *
 from discord.ext import commands
@@ -38,7 +38,7 @@ async def on_message(message):
 
   # SAYING HI
   if message.content.startswith('~hi'):
-    await message.channel.send("hey")
+    await message.channel.send("Hey, I am here to help!")
   
   # MAKING AN ANNOUNCEMENT
   if message.content.startswith('~announcement'):
@@ -58,18 +58,26 @@ async def on_message(message):
   
   # PUT STUDENTS INTO BREAKOUT ROOMS
   if message.content.startswith('~breakout') and 'Professor' in str(message.author.roles):
+    studentAmount = 0
+    student = []
     for member in guild.members:
       if 'Student' in str(member.roles):
-        if random.random() < 0.3333:
-          channel = client.get_channel(810214075912421427) 
-        elif random.random() < 0.6666:
+        student.append(member)
+        studentAmount = studentAmount + 1
+    while studentAmount > 0:
+      randStudent = random.choice(student)
+      if studentAmount % 3 == 0:
+          channel = client.get_channel(810214406636961854) 
+      elif studentAmount % 2 == 0:
           channel = client.get_channel(810214372592713759)
-        else:
-          channel = client.get_channel(810214406636961854)
-        try:
-          await member.move_to(channel)
-        except:
-          pass
+      else:
+          channel = client.get_channel(810214075912421427)
+      try:
+          await randStudent.move_to(channel)
+          student.remove(randStudent)
+          studentAmount = studentAmount - 1
+      except:
+          pass  
   
   # MUTES EVERY STUDENT
   if message.content.startswith('~mute') and 'Professor' in str(message.author.roles):
@@ -125,12 +133,12 @@ async def on_message(message):
     await message.channel.send(search.communicate(message.content[8:]))
 
   # ADD ASSIGNMENT TO CALENDAR
-  if message.content.startswith('~assignment'):
+  if message.content.startswith('~assignment') and 'Professor' in str(message.author.roles):
     event, deadline = message.content.split()[1], message.content.split()[2]
     database2.create_deadline(event, deadline)
 
   # DELETE AN ASSIGNMENT 
-  if message.content.startswith('~delete_assignment'):
+  if message.content.startswith('~delete_assignment') and 'Professor' in str(message.author.roles):
     event = message.content.split()[1]
     database2.delete_deadline(event)
 
@@ -226,5 +234,5 @@ async def on_message(message):
   if message.content.startswith('~help'):
     helpMessage = open('helper.txt', 'r')
     await message.channel.send(f"```{helpMessage.read()}```")
-
+    
 client.run('Token Goes Here')
