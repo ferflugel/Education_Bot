@@ -1,1 +1,55 @@
+Welcome to Soph-E, a bot that aims to facilitate esducation via Discord. This is a guide of how to use Soph-E.
+
+IMPORTANT:
+- Create a role named "Professor", granting teaching permissions for users with it.
+- Create a role named "Student", grating student permissions for users with it. 
+
+Commands:
+
+1. Say Hi using ~hi
+
+2. Make an announcement using ~announcement
+
+(PROFESSOR ONLY)
+3. Assemble all students at the classroom voice channel using (Avengers) ~assemble
+
+(PROFESSOR ONLY)
+4. Put students into breakout voice channels using ~breakout
+
+(PROFESSOR ONLY)
+5. Mute all students with the command ~mute
+
+(PROFESSOR ONLY)
+6. Unmute all students with the command ~unmute
+
+7. Ask a question with ~question
+
+8. See all unanswered questions by using ~show_questions
+
+9. Answer a question from the unanswered ones with ~answer
+
+10. Create a quick poll using ~poll
+
+11. Search for information using ~search 
+
+12. Add an assignment to the class calendar with ~assignment 
+
+13. See the assignments for the class by typing ~see_assignments
+
+14. Use the integrated calculator with the following commands:
+
+  14.1. Add values with ~add
+  14.2. Subtract values with ~sub
+  14.3. Multiply values with ~mult
+  14.4. Divide values with ~div
+  14.5. Find a mark in percentage using ~mark
+  14.6. Find a square root with ~sqrt
+  14.7. Find a powe with ~pow
+  14.8. Find an average with ~avg
+  14.9. Do any calculation with ~eval 
+
+
+
+
+
 
