@@ -1,4 +1,4 @@
-Welcome to Soph-E, a bot that aims to facilitate esducation via Discord. This is a guide of how to use Soph-E.
+Welcome to Soph-E, a bot that aims to facilitate education via Discord. This is a guide of how to use Soph-E.
 
 IMPORTANT:
 - Create a role named "Professor", granting teaching permissions for users with it.
@@ -8,7 +8,7 @@ Commands:
 
 1. Say Hi using ~hi
 
-2. Make an announcement using ~announcement
+2. Make an announcement using ~announcement [announcement]
 
 (PROFESSOR ONLY)
 3. Assemble all students at the classroom voice channel using (Avengers) ~assemble
@@ -22,28 +22,38 @@ Commands:
 (PROFESSOR ONLY)
 6. Unmute all students with the command ~unmute
 
-7. Ask a question with ~question
+7. Ask a question with ~question [question]
 
 8. See all unanswered questions by using ~show_questions
 
-9. Answer a question from the unanswered ones with ~answer
+9. Answer a question from the unanswered ones with ~answer [question_number] [answer]
 
-10. Create a quick poll using ~poll
+10. Create a poll with thumb up and down option using ~thumbs_poll [polling question]
 
-11. Search for information using ~search 
+10. Create a poll with numbered options from 1 to 5 ~options_poll [polling question]
 
-12. Add an assignment to the class calendar with ~assignment 
+12. Search for information using ~search [querry]
 
-13. See the assignments for the class by typing ~see_assignments
+(PROFESSOR ONLY)
+13. Add an assignment with ~assignment [assignment_name] [due date]
 
-14. Use the integrated calculator with the following commands:
+(PROFESSOR ONLY)
+14. Delete an assignment with ~delete_assignment [assignment_name]
 
-  14.1. Add values with ~add
-  14.2. Subtract values with ~sub
-  14.3. Multiply values with ~mult
-  14.4. Divide values with ~div
-  14.5. Find a mark in percentage using ~mark
-  14.6. Find a square root with ~sqrt
-  14.7. Find a powe with ~pow
-  14.8. Find an average with ~avg
-  14.9. Do any calculation with ~eval 
+15. See the assignments for the class by typing ~see_assignments
+
+16. Be a tutor by sending ~tutor
+
+17. Ask for a tutor by sending ~tutee
+
+18. Use the integrated calculator with the following commands:
+
+  18.1. Add values with ~add [num1] [num2]
+  18.2. Subtract values with ~sub [num1] [num2]
+  18.3. Multiply values with ~mult [num1] [num2]
+  18.4. Divide values with ~div [num1] [num2]
+  18.5. Find a mark in percentage using ~mark [point] [total point]
+  18.6. Find a square root with ~sqrt [num]
+  18.7. Find a power with ~pow [base] [exponent]
+  18.8. Find an average with ~avg [num1] [num2] ... [num n]
+  18.9. Do any calculation with ~eval [valid equation (uses +, -, *, /, (), sqrt, pow)]
