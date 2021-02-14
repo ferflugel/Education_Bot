@@ -3,6 +3,7 @@ import random
 from math import *
 from discord.ext import commands
 import database
+import database2
 import search
 
 client = discord.Client()
@@ -28,6 +29,12 @@ async def on_message(message):
     return
 
   ########################## BASIC FUNCTIONALITIES ##############################
+
+  # TESTING
+  if message.content.startswith('~test'):
+    event, deadline = message.content.split()[1], message.content.split()[2]
+    database2.create_deadline(event, deadline)
+    await message.channel.send(f"```{database2.print_calendar()}```")
 
   # SAYING HI
   if message.content.startswith('~hi'):
@@ -100,10 +107,18 @@ async def on_message(message):
     questions.pop(index)
     questions.pop(index)
 
-  # CREATE A POLL
-  if message.content.startswith('~poll'):
+  # CREATE A YES OR NO POLL
+  if message.content.startswith('~thumbs_poll'):
     await message.add_reaction('👍')
     await message.add_reaction('👎')
+
+  # CREATE A OPTIONS POLL
+  if message.content.startswith('~options_poll'):
+    await message.add_reaction('1️⃣')
+    await message.add_reaction('2️⃣')
+    await message.add_reaction('3️⃣')
+    await message.add_reaction('4️⃣')
+    await message.add_reaction('5️⃣')
 
   # SEARCH ENGINE
   if message.content.startswith('~search'):
@@ -112,13 +127,53 @@ async def on_message(message):
   # ADD ASSIGNMENT TO CALENDAR
   if message.content.startswith('~assignment'):
     event, deadline = message.content.split()[1], message.content.split()[2]
-    database.insert_event(event, deadline)
+    database2.create_deadline(event, deadline)
+
+  # DELETE AN ASSIGNMENT 
+  if message.content.startswith('~delete_assignment'):
+    event = message.content.split()[1]
+    database2.delete_deadline(event)
 
   # SEE CALENDAR
   if message.content.startswith('~see_assignments'):
-    await message.channel.send(database.print_calendar())
-      
+    await message.channel.send(f"```{database2.print_calendar()}```")
 
+  # TUTOR PAIRING - BE A TUTOR
+  if message.content.startswith('~tutor'):
+    check = 0
+    for member in guild.members:
+      if 'Tutee' in str(member.roles) and check == 0:
+        try:
+          await member.remove_roles(discord.utils.get(message.guild.roles, id=810358472779497522))
+          await message.channel.send(f"{message.author.mention}, you will be tutoring {member.mention}!")
+          check += 1
+        except:
+          pass
+    if check == 0:
+      try:
+        role = discord.utils.get(message.guild.roles, id=810358345562062870)
+        await message.author.add_roles(role)
+      except:
+        pass
+
+  # TUTOR PAIRING - ASK FOR A TUTOR
+  if message.content.startswith('~tutee'):
+    check = 0
+    for member in guild.members:
+      if 'Tutor' in str(member.roles) and check == 0:
+        try:
+          await member.remove_roles(discord.utils.get(message.guild.roles, id=810358345562062870))
+          await message.channel.send(f"{member.mention}, you will be tutoring {message.author.mention}!")
+          check += 1
+        except:
+          pass
+    if check == 0:
+      try:
+        role = discord.utils.get(message.guild.roles, id=810358472779497522)
+        await message.author.add_roles(role)
+      except:
+        pass
+      
   ########################## INTEGRATED CALCULATOR ##############################
 
   # ADDITION
@@ -162,5 +217,14 @@ async def on_message(message):
     for number in message.content.split()[1:]:
       total += int(number)
     await message.channel.send(str(total / len(message.content.split()[1:])))
+  
+  # EVALUATE
+  if message.content.startswith('~eval'):
+    await message.channel.send(eval(message.content[5:]))
+
+  # HELP
+  if message.content.startswith('~help'):
+    helpMessage = open('helper.txt', 'r')
+    await message.channel.send(f"```{helpMessage.read()}```")
 
 client.run('Token Goes Here')
