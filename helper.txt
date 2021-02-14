@@ -47,9 +47,3 @@ Commands:
   14.7. Find a powe with ~pow
   14.8. Find an average with ~avg
   14.9. Do any calculation with ~eval 
-
-
-
-
-
-
