@@ -1,3 +1,3 @@
-# Sof-E
+# Soph-E
 
 Project for yuHacks
